@@ -10,18 +10,15 @@ class PostList extends React.Component {
     }
     // What gets rendered to the screen //
     render () {
-        console.log("this: " + this.props.posts)
+        console.log("this: ", this.props.posts)
         return <div>Post List</div>
     }
 
 }
-// Declares a variable to store what we want to reduce to state //
+// create a mapStateToProps function to include posts into the newly rendered value of state //
 const mapStateToProps = state => {
-    return { posts: state.post };
+    return { posts: state.posts };
 }
 
 // exports the component and the stated variable by connecting it with redux //
-export default connect( 
-    mapStateToProps, 
-    { fetchPosts } 
-) (PostList);
+export default connect( mapStateToProps, { fetchPosts } ) (PostList);
