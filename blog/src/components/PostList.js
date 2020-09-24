@@ -1,20 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions'
+import { fetchPosts, fetchPostsAndUsers} from '../actions';
+import UserHeader from './UserHeader';
 
 // component that will render the data from jsonPlaceholders Api
 class PostList extends React.Component {
     // When the component first appears on screen it will instantly call the api using the fetchPosts function //
     componentDidMount(){
-        this.props.fetchPosts();
+        // this.props.fetchPosts();
+        this.props.fetchPostsAndUsers();
     }
     
-    // Create more complexity here //
-
+    renderList() {
+        return this.props.posts.map( post => {
+            return (
+                <div className="item" key={post.id}>
+                    <i className="large middle aligned icon user" />
+                    <div className="content">
+                        <div className="description">
+                            <h2>{post.title}</h2>
+                            <p>{post.body}</p>
+                        </div>
+                        <UserHeader userId={post.userId} />
+                    </div>
+                </div>
+            )
+        })
+    }
     // What gets rendered to the screen //
     render () {
-        console.log("this: ", this.props.posts)
-        return <div>Post List</div>
+        return <div className=" ui relaxed divided list"> {this.renderList()}</div>
     }
 
 }
@@ -24,4 +39,4 @@ const mapStateToProps = state => {
 }
 
 // exports the component and the stated variable by connecting it with redux //
-export default connect( mapStateToProps, { fetchPosts } ) (PostList);
+export default connect( mapStateToProps, { fetchPostsAndUsers } ) (PostList);
