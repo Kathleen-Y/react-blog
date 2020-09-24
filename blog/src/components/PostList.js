@@ -8,6 +8,9 @@ class PostList extends React.Component {
     componentDidMount(){
         this.props.fetchPosts();
     }
+    
+    // Create more complexity here //
+
     // What gets rendered to the screen //
     render () {
         console.log("this: ", this.props.posts)
